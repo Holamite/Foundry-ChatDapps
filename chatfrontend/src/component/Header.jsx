@@ -6,10 +6,10 @@ export default function Header() {
       gap={"4"}
       align={"center"}
       justify={"between"}
-      className="p-[2rem] py-[4rem]"
+      className=" py-[4rem]"
     >
-      <div className="text-2xl text-[#fff] text-[4rem] font-bold">
-        Chat  Messager
+      <div className="text-2xl text-[#888] text-[4rem] font-bold">
+        Chat Messager
       </div>
       <w3m-button />
     </Flex>

@@ -1,65 +1,76 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-import {LibNSEvents} from "./libraries/LibNameService.sol";
+import {LibENSErrors, LibENSEvents} from "./libraries/LibNameService.sol";
 
 contract ENS {
     struct DomainDetails {
-        string domainName;
-        string avatarURI;
         address owner;
+        string ensName;
+        string DisplayPictureURI;
     }
-
-    error DomainNotRegistered();
-    error NameAlreadyTaken();
-    error NotDomainOwner();
 
     mapping(string => address) public nameToAddress;
     mapping(string => DomainDetails) public domains;
 
-    function getDomainDetails(
-        string memory _domainName
+    function getEnsDetails(
+        string memory _ensName
     ) public view returns (string memory, string memory, address) {
-        if (nameToAddress[_domainName] == address(0)) {
-            revert DomainNotRegistered();
+        if (nameToAddress[_ensName] == address(0)) {
+            revert LibENSErrors.EnsNotRegistered();
         }
 
         return (
-            domains[_domainName].domainName,
-            domains[_domainName].avatarURI,
-            domains[_domainName].owner
+            domains[_ensName].ensName,
+            domains[_ensName].DisplayPictureURI,
+            domains[_ensName].owner
         );
     }
 
     function registerNameService(
-        string memory _domainName,
-        string memory _avatarURI
+        string memory _ensName,
+        string memory _displayPictureURI
     ) public {
-        if (nameToAddress[_domainName] != address(0)) {
-            revert NameAlreadyTaken();
+        if (nameToAddress[_ensName] != address(0)) {
+            revert LibENSErrors.EnsAlreadyTaken();
         }
-        nameToAddress[_domainName] = msg.sender;
-        domains[_domainName] = DomainDetails(
-            _domainName,
-            _avatarURI,
-            msg.sender
+        nameToAddress[_ensName] = msg.sender;
+        domains[_ensName] = DomainDetails(
+            msg.sender,
+            _ensName,
+            _displayPictureURI
         );
 
-        emit LibNSEvents.NameRegistered(msg.sender, _domainName);
+        emit LibENSEvents.EnsRegistered(msg.sender, _ensName);
     }
 
-    function updateDomainAvatar(
-        string memory _domainName,
-        string memory _avatarURI
+    function updateEnsDP(
+        string memory _ensName,
+        string memory _displayPictureURI
     ) public {
-        if (nameToAddress[_domainName] == address(0)) {
-            revert DomainNotRegistered();
+        if (nameToAddress[_ensName] == address(0)) {
+            revert LibENSErrors.EnsNotRegistered();
         }
-        if (nameToAddress[_domainName] != msg.sender) {
-            revert NotDomainOwner();
+        if (nameToAddress[_ensName] != msg.sender) {
+            revert LibENSErrors.NotEnsOwner();
         }
 
-        domains[_domainName].avatarURI = _avatarURI;
-        emit LibNSEvents.AvatarUpdated(msg.sender, _domainName);
+        domains[_ensName].DisplayPictureURI = _displayPictureURI;
+        emit LibENSEvents.DPUpdated(msg.sender, _ensName);
+    }
+
+    function updateUserName(
+        string memory _ensName,
+        string memory _userName
+    ) public {
+        if (nameToAddress[_ensName] == address(0)) {
+            revert LibENSErrors.EnsNotRegistered();
+        }
+        if (nameToAddress[_ensName] != msg.sender) {
+            revert LibENSErrors.NotEnsOwner();
+        }
+
+        domains[_ensName].DisplayPictureURI = _userName;
+        emit LibENSEvents.DPUpdated(msg.sender, _ensName);
     }
 }

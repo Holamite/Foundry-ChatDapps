@@ -10,8 +10,6 @@ import { Container } from "@radix-ui/themes";
 
 configureWeb3Modal();
 function App() {
-
-
   return (
     <>
       <Container className="px-[2rem]">

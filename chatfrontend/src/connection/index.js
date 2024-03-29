@@ -1,12 +1,13 @@
+
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
 
 export const SUPPORTED_CHAIN = 11155111;
 
 const sepolia = {
   chainId: SUPPORTED_CHAIN,
-  name: "sepolia",
-  currency: "Eth",
-  explorerUrl: "https://sepolia.etherscan.io/",
+  name: "Sepolia",
+  currency: "ETH",
+  explorerUrl: "https://sepolia.etherscan.io",
   rpcUrl: import.meta.env.VITE_rpc_url,
 };
 
@@ -24,3 +25,4 @@ export const configureWeb3Modal = () =>
     projectId: import.meta.env.VITE_projectId,
     enableAnalytics: false, // Optional - defaults to your Cloud configuration
   });
+

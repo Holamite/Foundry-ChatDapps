@@ -29,7 +29,7 @@ const Message = () => {
           .getRegisteredUsers()
           .then((res) => {
             const converted = res.map((item) => ({
-              ensName: item.ensName,
+              ensName: ethers.decodeBytes32String(item.ensName),
               DisplayPictureURI: item.DisplayPictureURI,
             }));
     

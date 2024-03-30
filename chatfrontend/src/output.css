@@ -1409,6 +1409,14 @@ input:checked + .toggle-bg {
   margin-top: 1rem;
 }
 
+.ml-64 {
+  margin-left: 16rem;
+}
+
+.ml-\[10rem\] {
+  margin-left: 10rem;
+}
+
 .block {
   display: block;
 }
@@ -1540,6 +1548,22 @@ input:checked + .toggle-bg {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-\[80vh\] {
+  height: 80vh;
+}
+
+.h-\[100vh\] {
+  height: 100vh;
+}
+
+.h-\[90vh\] {
+  height: 90vh;
+}
+
+.h-\[92vh\] {
+  height: 92vh;
 }
 
 .max-h-\[90dvh\] {

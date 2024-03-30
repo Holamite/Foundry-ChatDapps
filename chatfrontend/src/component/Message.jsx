@@ -22,6 +22,8 @@ const Message = () => {
     const { walletProvider } = useWeb3ModalProvider();
     const { address } = useWeb3ModalAccount();
 
+    
+
     useEffect(() => {
         const contract = chatContract(readOnlyProvider);
     
@@ -53,7 +55,9 @@ const Message = () => {
     
         const contract = chatContract(signer);
         try {
-          const tx = await contract.sendMessage(receiverEnsName, messageContent);
+            const tx = await contract.sendMessage(receiverEnsName, messageContent);
+            console.log(tx)
+            
           const txReceipt = await tx.wait();
           console.log("Receipt: ", txReceipt);
           setMessageContent("");
@@ -105,7 +109,8 @@ const Message = () => {
         </div>
         </nav>
 
-        <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700 " aria-label="Sidebar">
+       <div className='flex'>
+       <aside id="logo-sidebar" className=" w-64 h-screen pt-20 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 " aria-label="Sidebar">
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
 
         <h2 className="text-xl font-semibold mb-4 text-black">Chats</h2>
@@ -132,8 +137,8 @@ const Message = () => {
         </div>
         </aside>  
 
-        <div className=" sm:ml-64">
-            <div className="border-gray-200 rounded-lg dark:border-gray-700 mt-14">
+        <div className="w-full">
+            <div className="border-gray-200 rounded-lg dark:border-gray-700 mt-14 flex flex-col justify-between items-between h-[92vh]">
                     
                     {/* Body */}
                 <div className="flex-1 flex flex-col justify-between">
@@ -176,7 +181,7 @@ const Message = () => {
                 </div>
 
                     {/* Input field && button */}
-                <div className='fixed bottom-0 left-0 w-full bg-gray-200 p-4'>
+                <div className='bottom-0 left-0 w-full bg-gray-200 p-4'>
                 <label htmlFor="search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Type a message...</label>
             <div className="relative">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -192,6 +197,7 @@ const Message = () => {
                 value={messageContent}
                 onChange={(e) => setMessageContent(e.target.value)}
                 placeholder="Type a message..." required />
+                
 
                 <button 
                 type="submit"
@@ -202,6 +208,7 @@ const Message = () => {
 
             </div>
         </div>
+       </div>
     </>
   )
 }

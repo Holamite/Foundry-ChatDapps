@@ -10,6 +10,8 @@ contract ENS {
         string DisplayPictureURI;
     }
 
+    DomainDetails[] public registerUsers;
+
     mapping(string => address) public nameToAddress;
     mapping(string => DomainDetails) public domains;
 
@@ -40,6 +42,7 @@ contract ENS {
             _ensName,
             _displayPictureURI
         );
+        registerUsers.push(domains[_ensName]);
 
         emit LibENSEvents.EnsRegistered(msg.sender, _ensName);
     }
@@ -72,5 +75,9 @@ contract ENS {
 
         domains[_ensName].DisplayPictureURI = _userName;
         emit LibENSEvents.DPUpdated(msg.sender, _ensName);
+    }
+
+    function getAllRegisterUser() public view returns (DomainDetails[] memory) {
+        return registerUsers;
     }
 }

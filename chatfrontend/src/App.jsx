@@ -6,6 +6,7 @@ import '@radix-ui/themes/styles.css';
 import Resigtration from "./component/Resigtration";
 import "./output.css";
 import { Container } from "@radix-ui/themes";
+import Message from "./component/Message"
 
 
 configureWeb3Modal();
@@ -13,7 +14,6 @@ function App() {
   return (
     <>
       <Container className="px-[2rem]">
-      <Header/>
       <Resigtration/>
       <ToastContainer />
       </Container>

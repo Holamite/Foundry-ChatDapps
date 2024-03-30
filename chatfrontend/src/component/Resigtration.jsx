@@ -4,9 +4,13 @@ import { getProvider } from '../constants/Providers';
 import { getContract } from '../constants/contracts';
 import { toast } from 'react-toastify';
 import { ethers } from 'ethers';
+import Header from './Header';
+import {  useNavigate } from "react-router-dom";
 
 
 const Resigtration = () => {
+
+  const navigate= useNavigate();
     const  {walletProvider} = useWeb3ModalProvider();
     const [files, setFiles] = useState();
     const [ensName, setEnsName] = useState("");
@@ -52,6 +56,7 @@ const Resigtration = () => {
     
             if (receipt.status) {
               notification = "Account created successfully";
+              navigate("/Message")
             } else {
               return toast.error("Account creation failed");
             }
@@ -77,7 +82,8 @@ const Resigtration = () => {
       };
 
   return (
-    
+    <>
+    <Header/>
     <div className='flex justify-center items-center'>
         <div className='border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-[2rem] w-full max-w-sm bg-white '>
          <input aria-describedby="file_input_help" id="file_input" type="file" onChange={e => setFiles(e.target.files[0])} hidden/>
@@ -108,16 +114,12 @@ const Resigtration = () => {
             </div>
 
             
-            <button type="submit" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 my-[1rem]  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 w-full">Resiger</button>
-
-            {/* <button type="submit"></button> */}
+            <button type="submit" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 my-[1rem]  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 w-full" >Register</button>
+            
         </form>
-
-        
-
-
     </div>
     </div>
+    </>
   )
 }
 

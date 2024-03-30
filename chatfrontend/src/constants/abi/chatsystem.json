@@ -1,5 +1,16 @@
 [
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_contractAdrr",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -16,9 +27,9 @@
 			},
 			{
 				"indexed": false,
-				"internalType": "uint256",
-				"name": "timestamp",
-				"type": "uint256"
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"name": "MessageSent",
@@ -27,9 +38,9 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_receiver",
-				"type": "address"
+				"internalType": "string",
+				"name": "_receiverEnsName",
+				"type": "string"
 			},
 			{
 				"internalType": "string",
@@ -45,14 +56,14 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_sender",
-				"type": "address"
+				"internalType": "string",
+				"name": "_senderEnsName",
+				"type": "string"
 			},
 			{
-				"internalType": "address",
-				"name": "_receiver",
-				"type": "address"
+				"internalType": "string",
+				"name": "_receiverEnsName",
+				"type": "string"
 			}
 		],
 		"name": "getMessages",
@@ -84,24 +95,43 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "messages",
+		"inputs": [],
+		"name": "getRegisteredUsers",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"components": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "ensName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "DisplayPictureURI",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Struct.DomainDetails[]",
 				"name": "",
-				"type": "uint256"
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "nameService",
+		"outputs": [
+			{
+				"internalType": "contract IENS",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
